@@ -13,7 +13,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::simplePaginate();
+        $articles = Article::latest()->simplePaginate();
         return view('articles.index', compact('articles'));
     }
 
@@ -22,7 +22,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
@@ -30,7 +30,12 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        //
+
+        $article = new Article($request->validated());
+        $article-> title = $request->input('title');
+        $article-> body = $request-> input('body');
+        $article->save();
+        return redirect()-> route('articles.index');
     }
 
     /**
@@ -46,7 +51,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+
+       return view('article.edit', compact('article'));
     }
 
     /**
