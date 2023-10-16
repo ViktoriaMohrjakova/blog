@@ -3,7 +3,8 @@
 @section('content')
     <div class="container mx-auto max-w-lg">
         <div class="card  bg-base-100 shadow-xl ">
-            <form action="{{route('articles.store')}}" method="POST">
+
+            <form action="{{route('articles.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
             <div class="card-body">
                 <h2 class="card-title text-base">Title</h2>
@@ -21,6 +22,8 @@
                     <span class="label-text-alt text-error">{{$message}}</span>
                 </label>
                 @enderror
+                <input name="image" type="file" class="file-input  @error('image') textarea-error @enderror " placeholder="add image"/>
+
                  <input type="submit" value="Submit" class="btn btn-neutral w-28" />
             </div>
             </form>

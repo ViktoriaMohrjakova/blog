@@ -20,6 +20,13 @@ class ArticleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+    public function delete()
+    {
+        $articles = Article::onlyTrashed()->orderby('deleted_at')->simplePaginate();
+        return view('articles.index', compact('articles'));
+    }
+
     public function create()
     {
         return view('articles.create');
@@ -30,10 +37,9 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
+       dd($request->file('image')->store('/public'));
 
         $article = new Article($request->validated());
-        $article-> title = $request->input('title');
-        $article-> body = $request-> input('body');
         $article->save();
         return redirect()-> route('articles.index');
     }
