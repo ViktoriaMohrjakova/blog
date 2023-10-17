@@ -50,9 +50,8 @@
                             </a>
                         @endif
 
-                        <x-primary-button class="ml-3">
-                            {{ __('Log in') }}
-                        </x-primary-button>
+                        <input type="submit" class="btn btn-primary ml-3" value="{{ __('Log in') }}"/>
+
                     </div>
                 </form>
             </div>
